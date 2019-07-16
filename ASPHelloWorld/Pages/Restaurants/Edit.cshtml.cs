@@ -62,8 +62,7 @@ namespace ASPHelloWorld.Pages.Restaurants
             {
                 _restaurantData.Add(Restaurant);
             }
-
-            _restaurantData.Update(Restaurant);
+            
             _restaurantData.Commit();
             TempData["Message"] = "Restaurant saved!";
             return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });

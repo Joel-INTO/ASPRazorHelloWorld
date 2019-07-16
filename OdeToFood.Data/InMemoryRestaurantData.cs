@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using OdeToFood.Core;
 
 namespace OdeToFood.Data
 {
-    public interface IRestaurantData
-    {
-        IEnumerable<Restaurant> GetRestaurantsByName(string name);
-        Restaurant GetById(int id);
-        Restaurant Update(Restaurant updatedRestaurant);
-        Restaurant Add(Restaurant newRestaurant);
-        int Commit();
-    }
-
     public class InMemoryRestaurantData : IRestaurantData
     {
         private readonly List<Restaurant> restaurants;
@@ -57,6 +46,22 @@ namespace OdeToFood.Data
             restaurants.Add(newRestaurant);
             newRestaurant.Id = restaurants.Max(r => r.Id + 1);
             return newRestaurant;
+        }
+
+        public Restaurant Delete(int id)
+        {
+            var restaurant = restaurants.FirstOrDefault(r => r.Id == id);
+            if (restaurant != null)
+            {
+                restaurants.Remove(restaurant);
+            }
+
+            return restaurant;
+        }
+
+        public int GetCountOfRestaurants()
+        {
+            return restaurants.Count();
         }
 
         public Restaurant Update(Restaurant updatedRestaurant)

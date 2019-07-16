@@ -45,7 +45,12 @@
         @RenderBody()
         <hr />
         <footer>
+            <vc:restaurant-count></vc:restaurant-count>
+            <vc:priority-list max-priority="2" is-done="false">
+            </vc:priority-list>
+            @RenderSection("footer", required: false)
             <p>&copy; 2019 - ASPHelloWorld</p>
+            <img src="/signature-small.png" />
         </footer>
     </div>
 
